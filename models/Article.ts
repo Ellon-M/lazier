@@ -15,7 +15,8 @@ const articleSchema = new mongoose.Schema(
     },  
     author: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User'
+      required: true,
+      ref: 'User',
     },
     pinboards: {
       type: [mongoose.Schema.ObjectId],
