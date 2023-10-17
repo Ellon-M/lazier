@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --radius: 12px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +25,15 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+header {
+  padding: 0;
+  margin: 0;
+  background-color: hsla(0, 0%, 7%, 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(99, 99, 99, 0.302);
 }
 
 .launcher-bottom {
@@ -46,7 +56,7 @@ body {
   background-color: rgba(10, 10, 10, 0.82);
   border-bottom-left-radius: 11px;
   border-bottom-right-radius: 11px;
-  height: 125px;
+  height: 105px;
   bottom: -10px;
   left: -16px;
   right: -16px;
