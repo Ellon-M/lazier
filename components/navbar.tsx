@@ -19,17 +19,17 @@ import {
 export default function Navbar() {
   return (
     <>
-      <div className="flex flex-row justify-between px-12 py-1 text-[#b5b6ba]">
+      <div className="flex flex-row justify-between px-4 py-1 text-[#b5b6ba]">
         <div className="flex flex-row gap-2 justify-center items-center text-sm">
-          <Menu className="mr-2" color="#b5b6bac8"/>
-          <ArrowLeft size={20} className="mr-2" color="#b5b6ba"/>
+          <Menu className="mr-4" color="#b5b6bac8" strokeWidth={1}/>
+          <ArrowLeft size={20} className="mr-1.5" color="#b5b6ba"/>
           <ArrowRight size={20} color="#b5b6ba"/>
-          <div className="flex flex-row justify-center items-center ml-3 gap-2 text-xs">
-            <LayoutGrid  size={18} color="#b5b6bac5"/>
+          <div className="flex flex-row justify-center items-center ml-8 gap-2 text-xs">
+            <LayoutGrid  size={18} color="#ffffff"/>
             <span className="text-white">Capture</span>
           </div>
         </div>
-        <div className="flex flex-row gap-5 justify-evenly items-center text-xs relative">
+        <div className="flex flex-row gap-5 justify-evenly items-center text-xs relative pr-12">
           <Input
             type="text"
             placeholder="type to search"
@@ -37,7 +37,7 @@ export default function Navbar() {
           />
           <span className="absolute inset-y-0 left-2 top-1/2 transform -translate-y-1/2">
             {" "}
-            <Search size={18} color="#b5b6ba73"/>{" "}
+            <Search size={18} color="#b5b6ba73" strokeWidth={1}/>{" "}
           </span>
           <div className="flex flex-row gap-4 items-center justify-center">
             <Calendar color="#b5b6ba" size={18} />

@@ -35,7 +35,7 @@ export default function Quill() {
   };
 
   return (
-    <div className="flex flex-col items-center relative justify-center rounded-xl m-4 pt-4 px-4 bg-gradient-to-r from-opacity-60 from-[#303238] via-opacity-10 via-[#696969] to-opacity-60 to-[#3a3a3a] w-4/5 lg:w-[800px]">
+    <div className="flex flex-col items-center relative justify-center rounded-xl mx-4 my-8 pt-4 px-4 bg-gradient-to-r from-opacity-60 from-[#303238] via-opacity-10 via-[#696969] to-opacity-60 to-[#3a3a3a] w-4/5 lg:w-4/5 2xl:w-11/12">
       <ReactQuill
         theme="snow"
         value={value}

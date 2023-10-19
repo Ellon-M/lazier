@@ -56,6 +56,9 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      spacing: {
+        'screen-minus-40': 'calc(100vh - 43px)',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },

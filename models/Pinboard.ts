@@ -12,7 +12,7 @@ const pinboardSchema = new mongoose.Schema(
     },
     articles: {
       type: [mongoose.Schema.ObjectId],
-      ref: 'Pinboard'
+      ref: 'Article'
     }
   },
   { timestamps: true }
