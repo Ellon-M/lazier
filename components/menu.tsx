@@ -14,13 +14,35 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import usePins from "@/reusables/usePins";
+import { shuffleArray } from "@/lib/utils";
+import { emojilist } from "@/lib/emojilist";
 
 export default function Menu() {
   let count = 0;
+  const pinSkellies = 4;
+  const userId = process.env.NEXT_PUBLIC_TEMP_USER as string;
+  const {
+    pins,
+    isLoading,
+    error,
+  }: { pins: Pins[]; isLoading: boolean; error: Error } = usePins(userId);
 
+  // shuffleArray(emojilist);
   return (
     <>
       <div className="flex flex-col px-2 py-3 ml-0 mb-3 mt-2 border-b border-b-[#6363634d]">
@@ -66,32 +88,51 @@ export default function Menu() {
             </TooltipProvider>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
-                <DialogTitle>Edit profile</DialogTitle>
+                <DialogTitle>Create new Pinboard</DialogTitle>
                 <DialogDescription>
                   <span className="text-[#b5b6ba8e] mt-2">
-                    Make changes to your profile here. Click save when you're
-                    done.
+                    Stay organized. Create new pins to catalogue your notes and
+                    tasks.
                   </span>
                 </DialogDescription>
               </DialogHeader>
-              <div className="grid gap-4 py-4">
+              <div className="flex flex-row gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="username" className="text-right">
+                    Pin
+                  </Label>
+                  {/* <Input
+                    id="username"
+                    defaultValue="@peduarte"
+                    className="col-span-3"
+                  /> */}
+                  <Select>
+                    <SelectTrigger className="w-[75px] col-span-3">
+                      <SelectValue placeholder="📌" />
+                    </SelectTrigger>
+                    <SelectContent className="">
+                      <ScrollArea className="h-72 m-0 rounded-md border-0">
+                        <SelectGroup className="h-full grid grid-cols-8 pr-6">
+                          {emojilist.map((emoji) => (
+                            <SelectItem
+                              value={emoji}
+                              className="flex flex-col justify-center"
+                            >
+                              <span>{emoji}</span>
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </ScrollArea>
+                    </SelectContent>
+                  </Select>
+                </div>
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="name" className="text-right">
                     Name
                   </Label>
                   <Input
                     id="name"
-                    defaultValue="Pedro Duarte"
-                    className="col-span-3"
-                  />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="username" className="text-right">
-                    Username
-                  </Label>
-                  <Input
-                    id="username"
-                    defaultValue="@peduarte"
+                    defaultValue="Serendipity"
                     className="col-span-3"
                   />
                 </div>
@@ -103,48 +144,60 @@ export default function Menu() {
           </Dialog>
         </div>
         <div className="mt-4">
-          <ul className="text-sm flex flex-col gap-2.5 px-2">
-            <li className="flex flex-row items-center gap-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                className="-rotate-90 relative top-[1px] ml-1 h-3 w-3 transition duration-200"
-                aria-hidden="true"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-              <span>💎</span>
-              <span>Title 1</span>
-            </li>
-            <li className="flex flex-row items-center gap-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                className="-rotate-90 relative top-[1px] ml-1 h-3 w-3 transition duration-200"
-                aria-hidden="true"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-              <span>🥎️</span>
-              <span>Title 2</span>
-            </li>
-          </ul>
+          {error ? (
+            <div className="p-3 flex flex-col items-center justify-center">
+              <h5 className="text-[#a3a6ad] text-sm mt-2 italic">
+                Couldn't fetch pins at this time. Please check your connection
+                and try again.
+              </h5>
+            </div>
+          ) : (
+            <ul className="text-sm flex flex-col gap-2.5 px-2">
+              {isLoading ? (
+                <>
+                  {Array.from({ length: pinSkellies }, (_, index) => (
+                    <Loading />
+                  ))}
+                </>
+              ) : (
+                pins.map((pin) => (
+                  <li className="flex flex-row items-center gap-1 cursor-pointer">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      className="-rotate-90 ease-in relative top-[1px] ml-1 h-3 w-3 transition duration-150           "
+                      aria-hidden="true"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <span>{pin.icon ? pin.icon : "📌"}</span>
+                    <span>{pin.name}</span>
+                  </li>
+                ))
+              )}
+            </ul>
+          )}
         </div>
       </div>
     </>
   );
 }
+
+const Loading = () => {
+  return (
+    <div className="flex items-center space-x-2 p-2 w-full">
+      <div className="h-[28px] w-[28px] animate-pulse bg-[#817d7d34] rounded-[50%]" />
+      <div className="space-y-2.5">
+        <div className="h-2 animate-pulse rounded-md w-[165px] bg-[#817d7d34]" />
+        <div className="h-2 animate-pulse rounded-md w-[105px] bg-[#817d7d34]" />
+      </div>
+    </div>
+  );
+};

@@ -56,9 +56,17 @@ header {
   border-bottom: 1px solid rgba(99, 99, 99, 0.302);
 }
 
-/* .test {
-  background-color: hsl(240 10% 3.9%);
-} */
+.test {
+  background-color: hsla(30,0,100,0.15);
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.grid-cols-18 {
+  grid-template-columns: repeat(18, minmax(0, 1fr));
+}
 
 .launcher-bottom {
   border-bottom-left-radius: 13px;
@@ -85,4 +93,20 @@ header {
   left: -16px;
   right: -16px;
   z-index: -3;
+}
+
+.inbox-item {
+  transition: opacity .4s ease 0s;
+}
+
+.inbox-item:hover {
+  background: radial-gradient(80rem circle at 11px 19px ,hsla(0,0%,100%,.16),transparent);
+}
+
+.inbox-icon-skelly {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  padding: 0;
+  background-color: #817d7d34;
 }

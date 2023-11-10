@@ -6,6 +6,9 @@ const pinboardSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    icon: {
+      type: String,
+    },
     author: {
       type: mongoose.Schema.ObjectId,
       ref: 'User'

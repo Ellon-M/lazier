@@ -12,7 +12,10 @@ const articleSchema = new mongoose.Schema(
     content: {
       type: String,
       required: true,
-    },  
+    },
+    link: {
+      type: String,
+    },
     author: {
       type: mongoose.Schema.ObjectId,
       required: true,

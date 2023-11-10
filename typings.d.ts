@@ -1,1 +1,2 @@
-declare module 'quill-paste-smart'
+declare module "quill-paste-smart";
+

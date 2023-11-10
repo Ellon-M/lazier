@@ -58,6 +58,12 @@ module.exports = {
       },
       spacing: {
         'screen-minus-40': 'calc(100vh - 43px)',
+        'screen-minus-120': 'calc(100vh - 90px - 43px)',
+        'width-minus-menu': 'calc(100% - 250px)',
+        'margin-minus-menus': 'calc(3rem + 50px)',
+        'margin-plus-menus': '250px',
+        'previews-width': 'calc(100% - 600px)',
+        'previews-grid-12': 'calc(50% - 12px)'
       },
       keyframes: {
         "accordion-down": {
